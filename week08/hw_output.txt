@@ -1,0 +1,163 @@
+-- ==========================================
+-- STUDENT NAME: Jennifer
+-- STUDENT ID: Njogu
+-- ==========================================
+-- ------------------------------------------------------------------------------
+-- Task 1: The Unified Roster (Views & Complexity Abstraction)
+-- ------------------------------------------------------------------------------
+-- 1. Write your idempotent view definition for vw_team_rosters below.
+-- Required Output Columns: team_name, first_name, last_name, phone, parent_email
+DROP VIEW IF EXISTS vw_team_rosters;
+DROP VIEW
+CREATE VIEW vw_team_rosters AS
+    SELECT r.team_name, u.first_name, 
+    u.last_name, u.phone, 
+    u.parent_email
+    FROM registrations r
+    JOIN users u ON u.user_id = r.user_id
+    WHERE r.assigned_role = 'player';
+CREATE VIEW
+-- 2. Write your two verification queries below:
+--    * Verification Query 1: Total row count of vw_team_rosters (Expected: 11,934)
+    SELECT COUNT(*) 
+    FROM vw_team_rosters;
+ count 
+-------
+ 11934
+(1 row)
+
+--    * Verification Query 2: First 5 records ordered by team_name, last_name, first_name
+        SELECT team_name, first_name, last_name, phone, parent_email
+        FROM vw_team_rosters
+        ORDER BY team_name, last_name, first_name
+        LIMIT 5;
+ team_name | first_name | last_name |  phone   |       parent_email        
+-----------+------------+-----------+----------+---------------------------
+ U10 Storm | Alex       | Brodie    | 555-3022 | parent_brodie@gmail.com
+ U10 Storm | Alex       | Brodie    | 555-4180 | parent_brodie@outlook.com
+ U10 Storm | Alex       | Brodie    | 555-7860 | parent_brodie@yahoo.com
+ U10 Storm | Alex       | Brodie    | 555-6449 | parent_brodie@gmail.com
+ U10 Storm | Alex       | Brodie    | 555-3244 | parent_brodie@yahoo.com
+(5 rows)
+
+-- ------------------------------------------------------------------------------
+-- Task 2: The Above-Average Alert (CTEs & Multi-Stage Pipelines)
+-- ------------------------------------------------------------------------------
+-- Write your two-stage CTE pipeline querying vw_team_rosters to find teams whose
+-- active player count strictly exceeds the league-wide average team player count below.
+-- Order by roster_size descending, then team_name ascending.
+-- Required Output Columns: team_name, roster_size (Expected: 3 rows)
+    WITH StandardTotal AS(
+        SELECT team_name, COUNT(*) AS roster_size
+        FROM vw_team_rosters
+        GROUP BY team_name
+    )
+    SELECT team_name, roster_size
+    FROM StandardTotal
+    WHERE roster_size >(
+        SELECT AVG(roster_size)
+        FROM StandardTotal
+    )
+    ORDER BY roster_size DESC, team_name ASC;
+   team_name   | roster_size 
+---------------+-------------
+ U10 Storm     |        2076
+ U12 Bears     |        2018
+ U12 Lightning |        2012
+(3 rows)
+
+-- ------------------------------------------------------------------------------
+-- Task 3: Auto-Assigning Jerseys (Analytical Window Functions)
+-- ------------------------------------------------------------------------------
+-- Write your two-stage window query on vw_team_rosters to assign strictly sequential,
+-- unique jersey numbers starting at 1 per team (ordered by last_name, first_name).
+-- Filter the outer query to display only jersey numbers 1 and 2, ordered by team_name, jersey_number.
+-- Required Output Columns: team_name, first_name, last_name, jersey_number (Expected: 12 rows)
+WITH NumberedPlayers AS (
+    SELECT
+        team_name,
+        first_name,
+        last_name,
+        ROW_NUMBER() OVER (
+            PARTITION BY team_name
+            ORDER BY last_name ASC, first_name ASC
+        ) AS jersey_number
+    FROM vw_team_rosters
+)
+SELECT team_name, first_name, last_name, jersey_number
+FROM NumberedPlayers
+WHERE jersey_number IN (1, 2)
+ORDER BY team_name ASC, jersey_number ASC;
+   team_name   | first_name | last_name | jersey_number 
+---------------+------------+-----------+---------------
+ U10 Storm     | Alex       | Brodie    |             1
+ U10 Storm     | Alex       | Brodie    |             2
+ U10 Tigers    | Alex       | Brodie    |             1
+ U10 Tigers    | Alex       | Brodie    |             2
+ U12 Bears     | Alex       | Brodie    |             1
+ U12 Bears     | Alex       | Brodie    |             2
+ U12 Lightning | Alex       | Brodie    |             1
+ U12 Lightning | Alex       | Brodie    |             2
+ U14 Cobras    | Alex       | Brodie    |             1
+ U14 Cobras    | Alex       | Brodie    |             2
+ U14 Eagles    | Alex       | Brodie    |             1
+ U14 Eagles    | Alex       | Brodie    |             2
+(12 rows)
+
+-- ------------------------------------------------------------------------------
+-- Task 4: The Defensive Analytics Audit (Defensive Design & 3VL)
+-- ------------------------------------------------------------------------------
+-- 1. Write your Verification Query 1 below to prove the total row count of
+--    qualifying U10 active player audit records (Expected: 4,001):
+SELECT
+    u.user_id,
+    u.first_name,
+    u.last_name,
+    r.team_name,
+    COALESCE(g.gear_quantity, 0) AS gear_status,
+    CASE
+        WHEN r.fee_amount > 100.00 THEN 'Premium'
+        WHEN r.fee_amount = 0.00 THEN 'Scholarship'
+        ELSE 'Standard'
+    END AS payment_tier
+FROM registrations r
+JOIN users u ON u.user_id = r.user_id
+LEFT JOIN gear_orders g ON g.registration_id = r.registration_id
+WHERE r.assigned_role = 'player'
+  AND EXISTS (
+      SELECT 1
+      FROM teams t
+      WHERE t.team_name = r.team_name
+        AND t.age_group = 'U10'
+  )
+ORDER BY u.last_name ASC, u.first_name ASC, gear_status ASC
+LIMIT 5; --query 2
+ user_id | first_name | last_name | team_name  | gear_status | payment_tier 
+---------+------------+-----------+------------+-------------+--------------
+     184 | Alex       | Brodie    | U10 Storm  |           0 | Scholarship
+     100 | Alex       | Brodie    | U10 Tigers |           0 | Scholarship
+      63 | Alex       | Brodie    | U10 Tigers |           0 | Scholarship
+      80 | Alex       | Brodie    | U10 Storm  |           1 | Standard
+     115 | Alex       | Brodie    | U10 Tigers |           1 | Standard
+(5 rows)
+
+-- 2. Write your Verification Query 2 below to display the first 5 audit records
+--    ordered by last_name ascending, first_name ascending, and gear_status ascending.
+-- Required Output Columns: first_name, last_name, gear_status, payment_tier
+--query 1
+SELECT COUNT(*) AS audit_count
+FROM registrations r
+JOIN users u ON u.user_id = r.user_id
+LEFT JOIN gear_orders g ON g.registration_id = r.registration_id
+WHERE r.assigned_role = 'player'
+  AND EXISTS (
+      SELECT 1
+      FROM teams t
+      WHERE t.team_name = r.team_name
+        AND t.age_group = 'U10'
+  );
+ audit_count 
+-------------
+        4001
+(1 row)
+

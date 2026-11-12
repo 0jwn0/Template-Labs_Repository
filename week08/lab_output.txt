@@ -1,0 +1,124 @@
+-- ==========================================
+-- STUDENT NAME: Jennifer Njogu
+-- STUDENT ID: 01256232
+-- ==========================================
+-- ------------------------------------------------------------------------------
+-- Ticket 1: The Roster Safety & Age-Eligibility Audit (Defensive SQL)
+-- ------------------------------------------------------------------------------
+-- Write your defensive audit query for active players on 'U14 Eagles' below.
+-- Sort by emergency_email ASC, last_name ASC, first_name ASC, birthdate ASC, and limit to 8 rows.
+-- Required Output Columns: first_name, last_name, birthdate, emergency_email, eligibility_status (Expected: 8 rows)
+SELECT 
+    u.first_name, 
+    u.last_name, 
+    u.birthdate,
+    COALESCE(u.parent_email,'No Email on File') AS emergency_email,
+    CASE 
+        WHEN u.birthdate < DATE '2000-01-01' THEN 'Invalid Adult Birthdate'
+        WHEN u.birthdate >= DATE '2019-01-01' THEN 'Underage Waiver Required'
+        ELSE 'Standard Youth Eligible'
+    END AS eligibility_status
+FROM users u
+JOIN registrations r ON u.user_id = r.user_id
+WHERE r.assigned_role = 'player'
+    AND r.team_name = 'U14 Eagles'
+ORDER BY emergency_email ASC, u.first_name ASC , u.last_name ASC, u.birthdate ASC LIMIT 8;
+ first_name | last_name | birthdate  |    emergency_email    |    eligibility_status    
+------------+-----------+------------+-----------------------+--------------------------
+ Liam       | Brodie    | 2019-02-02 | No Email on File      | Underage Waiver Required
+ Liam       | Brown     | 1992-04-10 | No Email on File      | Invalid Adult Birthdate
+ Noah       | Williams  | 2018-04-27 | No Email on File      | Standard Youth Eligible
+ Olivia     | Rodriguez | 2019-09-19 | No Email on File      | Underage Waiver Required
+ Olivia     | Smith     | 1987-07-13 | No Email on File      | Invalid Adult Birthdate
+ Timmy      | Vance     | 1983-10-26 | No Email on File      | Invalid Adult Birthdate
+ Alex       | Brodie    | 1972-02-17 | parent_brodie@corp.io | Invalid Adult Birthdate
+ Alex       | Brodie    | 2017-01-15 | parent_brodie@corp.io | Standard Youth Eligible
+(8 rows)
+
+-- ------------------------------------------------------------------------------
+-- Ticket 2: The Equipment Manifest (Relational Views)
+-- ------------------------------------------------------------------------------
+-- 1. Write your idempotent view definition for vw_equipment_manifest below.
+-- Required Output Columns: age_group, gear_item, gear_size, total_quantity
+DROP VIEW IF EXISTS vw_equipment_manifest CASCADE;
+DROP VIEW
+CREATE VIEW vw_equipment_manifest AS
+    SELECT 
+    t.age_group, 
+    g.gear_item, 
+    g.gear_size,
+    SUM(g.gear_quantity) AS total_quantity
+    FROM teams t
+    JOIN registrations r ON r.team_name = t.team_name
+    JOIN gear_orders g ON g.registration_id = r.registration_id
+    GROUP BY
+        t.age_group,
+        g.gear_item,
+        g.gear_size;
+CREATE VIEW
+-- 2. Write your two verification queries below:
+--    * Verification Query 1: Total row count of the view (Expected: 84)
+        SELECT COUNT(*) 
+        FROM vw_equipment_manifest;
+ count 
+-------
+    84
+(1 row)
+
+--    * Verification Query 2: First 5 records ordered by age_group, gear_item, gear_size
+        SELECT age_group, gear_item, gear_size, total_quantity
+        FROM vw_equipment_manifest
+        ORDER BY age_group, gear_item, gear_size
+        LIMIT 5;
+ age_group | gear_item | gear_size | total_quantity 
+-----------+-----------+-----------+----------------
+ U10       | Cleats    | L         |            826
+ U10       | Cleats    | M         |            792
+ U10       | Cleats    | S         |            765
+ U10       | Cleats    | XL        |            790
+ U10       | Cleats    | YL        |            792
+(5 rows)
+
+-- ------------------------------------------------------------------------------
+-- Ticket 3: The Roster Age Extremes (Window Functions & Two-Stage Scoping)
+-- ------------------------------------------------------------------------------
+-- Write your two-stage analytical query to find active players in the top 2
+-- competition age ranks (youngest to oldest) on each team below.
+-- Required Output Columns: team_name, first_name, last_name, birthdate, age_rank (Expected: 14 rows)
+--stage 1
+WITH ranked_players AS(
+    SELECT
+        r.team_name,
+        u.first_name,
+        u.last_name,
+        u.birthdate,
+        RANK() OVER (
+            PARTITION BY r.team_name
+            ORDER BY u.birthdate DESC
+        ) AS age_rank
+    FROM registrations r
+    JOIN users u ON r.user_id = u.user_id
+    WHERE r.assigned_role = 'player'
+)--stage 2
+SELECT team_name, first_name, last_name, birthdate, age_rank
+FROM ranked_players
+WHERE age_rank IN (1, 2)
+ORDER BY team_name, age_rank, last_name, first_name;
+   team_name   | first_name | last_name | birthdate  | age_rank 
+---------------+------------+-----------+------------+----------
+ U10 Storm     | Grace      | Garcia    | 2019-12-29 |        1
+ U10 Storm     | Liam       | Oakley    | 2019-12-29 |        1
+ U10 Tigers    | Alex       | Brodie    | 2019-12-29 |        1
+ U10 Tigers    | Sophia     | Miller    | 2019-12-29 |        1
+ U12 Bears     | Marcus     | Davis     | 2019-12-30 |        1
+ U12 Bears     | Olivia     | Brown     | 2019-12-26 |        2
+ U12 Lightning | Oliver     | Brodie    | 2019-12-30 |        1
+ U12 Lightning | Sophia     | Brown     | 2019-12-29 |        2
+ U12 Lightning | Grace      | Garcia    | 2019-12-29 |        2
+ U12 Lightning | William    | Hopper    | 2019-12-29 |        2
+ U14 Cobras    | Ava        | Hopper    | 2019-12-29 |        1
+ U14 Cobras    | Daniel     | Garcia    | 2019-12-25 |        2
+ U14 Eagles    | Grace      | Brodie    | 2019-12-30 |        1
+ U14 Eagles    | Ava        | Hopper    | 2019-12-29 |        2
+(14 rows)
+
