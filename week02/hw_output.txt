@@ -1,0 +1,58 @@
+-- ==========================================
+-- STUDENT NAME: Jennifer Njogu
+-- STUDENT ID: 01256232
+-- ==========================================
+/*
+    I used AI to help me access the database for week 2 for homework 1. I hope that is correct.
+*/
+-- Task 1
+SELECT registration_id, first_name, last_name, gear_quantity, fee_amount FROM master_registration_dump WHERE gear_item LIKE '%Jersey%' AND fee_amount != (25.00 * gear_quantity) LIMIT 5;
+ registration_id | first_name | last_name | gear_quantity | fee_amount 
+-----------------+------------+-----------+---------------+------------
+            5281 | Grace      | Miller    |             1 |      15.00
+            5441 | Grace      | Martinez  |             1 |      15.00
+            5930 | Liam       | Hopper    |             1 |      40.00
+            5946 | Timmy      | Vance     |             1 |      15.00
+            6138 | William    | Oakley    |             1 |      40.00
+(5 rows)
+
+SELECT COUNT(*) FROM master_registration_dump WHERE gear_item LIKE '%Jersey%' AND fee_amount != (25.00 * gear_quantity);
+ count 
+-------
+   388
+(1 row)
+
+-- Task 2
+SELECT registration_id, first_name, last_name, gear_quantity, assigned_role FROM master_registration_dump WHERE assigned_role NOT IN ('player', 'coach', 'parent', 'volunteer') LIMIT 5;
+ registration_id | first_name | last_name | gear_quantity | assigned_role 
+-----------------+------------+-----------+---------------+---------------
+            5040 | Olivia     | Johnson   |             1 | Player
+            5077 | Olivia     | Hopper    |             1 | Parent 
+            5081 | Olivia     | Williams  |             1 | volunter
+            5094 | Liam       | Hopper    |             1 | Parent 
+            5132 | Oliver     | Jones     |             1 | Player
+(5 rows)
+
+SELECT COUNT(*) FROM master_registration_dump WHERE assigned_role NOT IN ('player', 'coach', 'parent', 'volunteer');
+ count 
+-------
+  2361
+(1 row)
+
+-- Task 3
+SELECT registration_id, first_name, last_name, birthdate, email FROM master_registration_dump WHERE assigned_role = 'player' AND birthdate > '2018-01-01'  AND (parent_email IS NULL OR BTRIM(parent_email) = '') LIMIT 5;
+ registration_id | first_name | last_name | birthdate  |            email             
+-----------------+------------+-----------+------------+------------------------------
+            5718 | Isabella   | Johnson   | 2018-11-08 | isabella.johnson22@gmail.com
+            6419 | Daniel     | Brown     | 2019-04-18 | daniel.brown99@gmail.com
+            7362 | Olivia     | Hopper    | 2019-08-18 | olivia.hopper97@corp.io
+            7573 | Emma       | Smith     | 2018-01-04 | emma.smith66@outlook.com
+            7645 | Oliver     | Garcia    | 2019-02-21 | oliver.garcia8@corp.io
+(5 rows)
+
+SELECT COUNT(*) FROM master_registration_dump WHERE assigned_role = 'player' AND birthdate > '2018-01-01'  AND (parent_email IS NULL OR BTRIM(parent_email) = '');
+ count 
+-------
+    46
+(1 row)
+
