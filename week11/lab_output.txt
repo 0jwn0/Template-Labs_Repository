@@ -1,0 +1,302 @@
+Current Mongosh Log ID:	6af68cd7870281455d544ca6
+Connecting to:		mongodb://127.0.0.1:27017/sports_db_nosql?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.8
+Using MongoDB:		7.0.48
+Using Mongosh:		2.3.8
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2026-11-13T01:13:52.728+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2026-11-13T01:13:53.044+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2026-11-13T01:13:53.044+00:00: Soft rlimits for open file descriptors too low
+------
+
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> sports_db_nosql
+sports_db_nosql> 20
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> sports_db_nosql
+sports_db_nosql> ... ... ... ... [
+  {
+    _id: ObjectId('6af665759cc6e35d7f544ca7'),
+    game_id: 4001,
+    home_team_id: 101,
+    away_team_id: 102,
+    current_score: { home: 3, away: 2 }
+  },
+  {
+    _id: ObjectId('6af665759cc6e35d7f544ca8'),
+    game_id: 4002,
+    home_team_id: 103,
+    away_team_id: 104,
+    current_score: { home: 4, away: 0 }
+  },
+  {
+    _id: ObjectId('6af665759cc6e35d7f544cab'),
+    game_id: 4005,
+    home_team_id: 102,
+    away_team_id: 103,
+    current_score: { home: 3, away: 3 }
+  },
+  {
+    _id: ObjectId('6af665759cc6e35d7f544caf'),
+    game_id: 4009,
+    home_team_id: 103,
+    away_team_id: 105,
+    current_score: { home: 3, away: 0 }
+  },
+  {
+    _id: ObjectId('6af665759cc6e35d7f544cb3'),
+    game_id: 4013,
+    home_team_id: 101,
+    away_team_id: 103,
+    current_score: { home: 3, away: 1 }
+  },
+  {
+    _id: ObjectId('6af665759cc6e35d7f544cba'),
+    game_id: 4055,
+    home_team_id: 101,
+    away_team_id: 102,
+    current_score: { home: 3, away: 2 }
+  }
+]
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> sports_db_nosql
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> ... ... ... ... [
+  { game_id: 4004 },
+  { game_id: 4007 },
+  { game_id: 4011 },
+  { game_id: 4018 }
+]
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> sports_db_nosql
+sports_db_nosql> 
+sports_db_nosql> ... ... ... ... ... ... ... ... [
+  {
+    game_id: 4004,
+    home_team_id: 101,
+    away_team_id: 105,
+    timeline_events: [
+      {
+        elapsed_minute: 19,
+        period: '1H',
+        event_type: 'foul',
+        actor_user_id: 1015,
+        details: 'Slide tackle from behind'
+      },
+      {
+        elapsed_minute: 37,
+        period: '1H',
+        event_type: 'goal',
+        actor_user_id: 1012,
+        details: 'Chip over advancing keeper'
+      },
+      {
+        elapsed_minute: 58,
+        period: '2H',
+        event_type: 'goal',
+        actor_user_id: 1092,
+        details: 'Tap-in from cross'
+      },
+      {
+        elapsed_minute: 72,
+        period: '2H',
+        event_type: 'red_card',
+        actor_user_id: 1015,
+        details: 'Violent conduct / serious foul play'
+      },
+      {
+        elapsed_minute: 84,
+        period: '2H',
+        event_type: 'goal',
+        actor_user_id: 1019,
+        details: '10-man game winner'
+      }
+    ]
+  },
+  {
+    game_id: 4011,
+    home_team_id: 105,
+    away_team_id: 102,
+    timeline_events: [
+      {
+        elapsed_minute: 31,
+        period: '1H',
+        event_type: 'goal',
+        actor_user_id: 1033,
+        details: 'Header off corner'
+      },
+      {
+        elapsed_minute: 85,
+        period: '2H',
+        event_type: 'red_card',
+        actor_user_id: 1098,
+        details: 'Spitting at opponent / violent conduct'
+      }
+    ]
+  },
+  {
+    game_id: 4018,
+    home_team_id: 103,
+    away_team_id: 101,
+    timeline_events: [
+      {
+        elapsed_minute: 30,
+        period: '1H',
+        event_type: 'goal',
+        actor_user_id: 1070,
+        details: 'Header'
+      },
+      {
+        elapsed_minute: 48,
+        period: '2H',
+        event_type: 'red_card',
+        actor_user_id: 1076,
+        details: 'Second yellow resulting in red'
+      },
+      {
+        elapsed_minute: 74,
+        period: '2H',
+        event_type: 'goal',
+        actor_user_id: 1012,
+        details: 'Equalizing free kick'
+      }
+    ]
+  }
+]
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> sports_db_nosql
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> ... ... ... ... ... ... ... ... ... ... ... ... ... ... {
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> ... ... ... [
+  {
+    game_id: 4055,
+    home_team_id: 101,
+    away_team_id: 102,
+    current_score: { home: 3, away: 2 },
+    timeline_events: [
+      {
+        elapsed_minute: 14,
+        period: '1H',
+        event_type: 'goal',
+        actor_user_id: 1012,
+        details: 'Strike from 20 yards'
+      },
+      {
+        elapsed_minute: 36,
+        period: '1H',
+        event_type: 'goal',
+        actor_user_id: 1033,
+        details: 'Header'
+      },
+      {
+        elapsed_minute: 59,
+        period: '2H',
+        event_type: 'goal',
+        actor_user_id: 1012,
+        details: 'Rebound off crossbar'
+      },
+      {
+        elapsed_minute: 77,
+        period: '2H',
+        event_type: 'goal',
+        actor_user_id: 1019,
+        details: 'Chip shot'
+      },
+      {
+        elapsed_minute: 88,
+        period: '2H',
+        event_type: 'substitution',
+        actor_user_id: 1042,
+        details: 'Late tactical substitution: J. Hanson for D. Miller'
+      },
+      {
+        elapsed_minute: 88,
+        period: '2H',
+        event_type: 'substitution',
+        actor_user_id: 1042,
+        details: 'Late tactical substitution: J. Hanson for D. Miller'
+      },
+      {
+        elapsed_minute: 88,
+        period: '2H',
+        event_type: 'substitution',
+        actor_user_id: 1042,
+        details: 'Late tactical substitution: J. Hanson for D. Miller'
+      },
+      {
+        elapsed_minute: 88,
+        period: '2H',
+        event_type: 'substitution',
+        actor_user_id: 1042,
+        details: 'Late tactical substitution: J. Hanson for D. Miller'
+      }
+    ]
+  }
+]
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
