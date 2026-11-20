@@ -18,7 +18,7 @@ db = db.getSiblingDB("sports_db_nosql");
 db.live_game_logs.find(
   { sport_type: "soccer", match_status: "completed",
   "current_score.home":{$gte: 3}},
-  { game_id: 1, home_team_id: 1, away_team_id: 1, current_score: 1}
+  { game_id: 1, home_team_id: 1, away_team_id: 1, current_score: 1, _id: 0}
 );
 
 

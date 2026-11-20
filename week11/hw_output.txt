@@ -1,0 +1,394 @@
+Current Mongosh Log ID:	6afe8ee18b6b3078cc544ca6
+Connecting to:		mongodb://127.0.0.1:27017/sports_db_nosql?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.8
+Using MongoDB:		7.0.48
+Using Mongosh:		2.3.8
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2026-11-19T05:46:20.770+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2026-11-19T05:46:21.476+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2026-11-19T05:46:21.476+00:00: Soft rlimits for open file descriptors too low
+------
+
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> sports_db_nosql
+sports_db_nosql> ... ... ... ... [
+  {
+    game_id: 4002,
+    home_team_name: 'Centennial Strikers',
+    away_team_name: 'Wayzata SC',
+    current_score: { home: 4, away: 0 }
+  },
+  {
+    game_id: 4008,
+    home_team_name: 'Blaine Fire',
+    away_team_name: 'Wayzata SC',
+    current_score: { home: 2, away: 0 }
+  },
+  {
+    game_id: 4009,
+    home_team_name: 'Centennial Strikers',
+    away_team_name: 'Minnetonka Thunder',
+    current_score: { home: 3, away: 0 }
+  },
+  {
+    game_id: 4015,
+    home_team_name: 'Wayzata SC',
+    away_team_name: 'Minnetonka Thunder',
+    current_score: { home: 2, away: 0 }
+  },
+  {
+    game_id: 4019,
+    home_team_name: 'Minnetonka Thunder',
+    away_team_name: 'Wayzata SC',
+    current_score: { home: 1, away: 0 }
+  }
+]
+sports_db_nosql> Invalid REPL keyword
+sports_db_nosql> Invalid REPL keyword
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> sports_db_nosql
+sports_db_nosql> ... ... ... ... ... ... ... ... [
+  {
+    game_id: 4001,
+    home_team_name: 'Maple Grove United',
+    away_team_name: 'Blaine Fire',
+    timeline_events: [
+      {
+        elapsed_minute: 14,
+        period: '1H',
+        event_type: 'goal',
+        actor_user_id: 1012,
+        details: 'Opening strike from top of the box'
+      },
+      {
+        elapsed_minute: 28,
+        period: '1H',
+        event_type: 'foul',
+        actor_user_id: 1055,
+        details: 'Tripping outside penalty area'
+      },
+      {
+        elapsed_minute: 41,
+        period: '1H',
+        event_type: 'goal',
+        actor_user_id: 1033,
+        details: 'Header from corner kick'
+      },
+      {
+        elapsed_minute: 55,
+        period: '2H',
+        event_type: 'yellow_card',
+        actor_user_id: 1055,
+        details: 'Persistent infringement'
+      },
+      {
+        elapsed_minute: 70,
+        period: '2H',
+        event_type: 'goal',
+        actor_user_id: 1012,
+        details: 'Rebound off crossbar'
+      },
+      {
+        elapsed_minute: 92,
+        period: '2H',
+        event_type: 'goal',
+        actor_user_id: 1024,
+        details: 'Stoppage time header winner'
+      }
+    ]
+  },
+  {
+    game_id: 4014,
+    home_team_name: 'Blaine Fire',
+    away_team_name: 'Plymouth Raptors',
+    timeline_events: [
+      {
+        elapsed_minute: 27,
+        period: '1H',
+        event_type: 'goal',
+        actor_user_id: 1033,
+        details: 'Header'
+      },
+      {
+        elapsed_minute: 53,
+        period: '2H',
+        event_type: 'goal',
+        actor_user_id: 1104,
+        details: 'Low drive'
+      },
+      {
+        elapsed_minute: 71,
+        period: '2H',
+        event_type: 'goal',
+        actor_user_id: 1038,
+        details: 'Turnaround shot'
+      },
+      {
+        elapsed_minute: 94,
+        period: '2H',
+        event_type: 'goal',
+        actor_user_id: 1088,
+        details: 'Equalizer off corner kick'
+      }
+    ]
+  }
+]
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> sports_db_nosql
+sports_db_nosql> ... ... [
+  {
+    game_id: 4001,
+    sport_type: 'soccer',
+    home_team_name: 'Maple Grove United',
+    timeline_events: [
+      {
+        elapsed_minute: 14,
+        period: '1H',
+        event_type: 'goal',
+        actor_user_id: 1012,
+        details: 'Opening strike from top of the box'
+      },
+      {
+        elapsed_minute: 28,
+        period: '1H',
+        event_type: 'foul',
+        actor_user_id: 1055,
+        details: 'Tripping outside penalty area'
+      },
+      {
+        elapsed_minute: 41,
+        period: '1H',
+        event_type: 'goal',
+        actor_user_id: 1033,
+        details: 'Header from corner kick'
+      },
+      {
+        elapsed_minute: 55,
+        period: '2H',
+        event_type: 'yellow_card',
+        actor_user_id: 1055,
+        details: 'Persistent infringement'
+      },
+      {
+        elapsed_minute: 70,
+        period: '2H',
+        event_type: 'goal',
+        actor_user_id: 1012,
+        details: 'Rebound off crossbar'
+      },
+      {
+        elapsed_minute: 92,
+        period: '2H',
+        event_type: 'goal',
+        actor_user_id: 1024,
+        details: 'Stoppage time header winner'
+      }
+    ]
+  },
+  {
+    game_id: 4004,
+    sport_type: 'soccer',
+    home_team_name: 'Maple Grove United',
+    timeline_events: [
+      {
+        elapsed_minute: 19,
+        period: '1H',
+        event_type: 'foul',
+        actor_user_id: 1015,
+        details: 'Slide tackle from behind'
+      },
+      {
+        elapsed_minute: 37,
+        period: '1H',
+        event_type: 'goal',
+        actor_user_id: 1012,
+        details: 'Chip over advancing keeper'
+      },
+      {
+        elapsed_minute: 58,
+        period: '2H',
+        event_type: 'goal',
+        actor_user_id: 1092,
+        details: 'Tap-in from cross'
+      },
+      {
+        elapsed_minute: 72,
+        period: '2H',
+        event_type: 'red_card',
+        actor_user_id: 1015,
+        details: 'Violent conduct / serious foul play'
+      },
+      {
+        elapsed_minute: 84,
+        period: '2H',
+        event_type: 'goal',
+        actor_user_id: 1019,
+        details: '10-man game winner'
+      }
+    ]
+  },
+  {
+    game_id: 4007,
+    sport_type: 'soccer',
+    home_team_name: 'Plymouth Raptors',
+    timeline_events: [
+      {
+        elapsed_minute: 18,
+        period: '1H',
+        event_type: 'red_card',
+        actor_user_id: 1109,
+        details: 'Denial of obvious goal scoring opportunity'
+      },
+      {
+        elapsed_minute: 25,
+        period: '1H',
+        event_type: 'goal',
+        actor_user_id: 1012,
+        details: 'Penalty kick'
+      },
+      {
+        elapsed_minute: 62,
+        period: '2H',
+        event_type: 'yellow_card',
+        actor_user_id: 1014,
+        details: 'Dissent towards referee'
+      },
+      {
+        elapsed_minute: 78,
+        period: '2H',
+        event_type: 'goal',
+        actor_user_id: 1018,
+        details: 'Counter-attack strike'
+      }
+    ]
+  },
+  {
+    game_id: 4016,
+    sport_type: 'basketball',
+    home_team_name: 'North Metro Ballers',
+    timeline_events: [
+      {
+        elapsed_minute: 10,
+        period: '1Q',
+        event_type: 'point',
+        actor_user_id: 2011,
+        details: '3-point jumper'
+      },
+      {
+        elapsed_minute: 24,
+        period: '2Q',
+        event_type: 'foul',
+        actor_user_id: 2022,
+        details: 'Personal foul on drive'
+      },
+      {
+        elapsed_minute: 38,
+        period: '4Q',
+        event_type: 'point',
+        actor_user_id: 2014,
+        details: 'Fastbreak dunk'
+      }
+    ]
+  }
+]
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
+sports_db_nosql> 
